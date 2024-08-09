@@ -54,6 +54,7 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.alertControl1 = new DevExpress.XtraBars.Alerter.AlertControl(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GCRecords)).BeginInit();
@@ -204,6 +205,7 @@
             // popupMenu1
             // 
             this.popupMenu1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barHeaderItem1),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnShow),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnHide),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnExit)});
@@ -235,6 +237,7 @@
             this.btnExit.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnExit.ImageOptions.SvgImage")));
             this.btnExit.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
             this.btnExit.Name = "btnExit";
+            this.btnExit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExit_ItemClick);
             // 
             // barManager1
             // 
@@ -246,8 +249,9 @@
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnShow,
             this.btnHide,
-            this.btnExit});
-            this.barManager1.MaxItemId = 3;
+            this.btnExit,
+            this.barHeaderItem1});
+            this.barManager1.MaxItemId = 4;
             // 
             // barDockControlTop
             // 
@@ -294,6 +298,15 @@
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
+            // 
+            // barHeaderItem1
+            // 
+            this.barHeaderItem1.Caption = "Working Time";
+            this.barHeaderItem1.Id = 3;
+            this.barHeaderItem1.Name = "barHeaderItem1";
+            this.barHeaderItem1.Tag = "Working Time";
             // 
             // FormMain
             // 
@@ -311,6 +324,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormMain";
             this.Text = "FormMain";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
@@ -357,5 +371,6 @@
         private DevExpress.XtraBars.BarButtonItem btnExit;
         private DevExpress.XtraBars.Alerter.AlertControl alertControl1;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private DevExpress.XtraBars.BarHeaderItem barHeaderItem1;
     }
 }

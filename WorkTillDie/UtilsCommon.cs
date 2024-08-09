@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Xml;
 
 namespace WorkTillDie
@@ -54,7 +56,7 @@ namespace WorkTillDie
 
         private void CreatePCRunningRecords(string filename)
         {
-            if(!Directory.Exists(Path.GetDirectoryName(filename)))
+            if (!Directory.Exists(Path.GetDirectoryName(filename)))
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(filename));
             }
@@ -102,7 +104,7 @@ namespace WorkTillDie
                 xmlYear.AppendChild(xmlMonth);
             }
 
-            XmlElement xmlDay = (XmlElement)xmlYear.SelectSingleNode($"Day[@Value='{day}']");
+            XmlElement xmlDay = (XmlElement)xmlMonth.SelectSingleNode($"Day[@Value='{day}']");
             if (xmlDay == null)
             {
                 xmlDay = xmlDoc.CreateElement("Day");
@@ -111,11 +113,10 @@ namespace WorkTillDie
             }
             XmlElement xmlRecord = xmlDoc.CreateElement("Record");
             xmlRecord.SetAttribute("Value", time.ToUniversalTime().Ticks.ToString());
-            xmlRecord.InnerText = time.ToString("yyyy-MM-dd HH:mm:ss:ffff");
+            xmlRecord.InnerText = time.ToString("yyyy-MM-dd HH:mm:ss:ffff");//
 
             xmlDay.AppendChild(xmlRecord);
             xmlDoc.Save(filename);
-            Logger.WriteInfo("Add record: " + time.ToString());
 
             return true;
         }
@@ -146,15 +147,33 @@ namespace WorkTillDie
 
             foreach (XmlElement xmlRecord in xmlDay.ChildNodes)
             {
-                string str = xmlRecord.InnerText = time.ToString("yyyy-MM-dd HH:mm:ss:ffff");
-                DateTime t = DateTime.Parse(str);
+                string str = xmlRecord.InnerText;// = time.ToString("yyyy-MM-dd HH:mm:ss:ffff");
+                //DateTimeFormatInfo dtFormat = new DateTimeFormatInfo();
+                //dtFormat.ShortDatePattern = "yyyy-MM-dd HH:mm:ss:ffff";
+                DateTime t = DateTime.ParseExact(str, "yyyy-MM-dd HH:mm:ss:ffff",null);
                 listDatetime.Add(t);
             }
             return listDatetime.ToArray();
-
         }
 
-
+        public DateTime[] getAllRecordsOfEveryday()
+        {
+            List<DateTime> listDatetime = new List<DateTime>();
+            string filename = GetRecordFile();
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(filename);
+            XmlElement root = (XmlElement)xmlDoc.SelectSingleNode("Records");
+            if (root == null) return null;
+            XmlNodeList nodeList = root.SelectNodes("Year/Month/Day/Record");
+            foreach (XmlNode node in nodeList) { 
+                string str = node.InnerText;
+                //DateTimeFormatInfo dtFormat = new DateTimeFormatInfo();
+                //dtFormat.ShortDatePattern = "yyyy-MM-dd HH:mm:ss:ffff";
+                DateTime t = DateTime.ParseExact(str, "yyyy-MM-dd HH:mm:ss:ffff", null);
+                listDatetime.Add(t);
+            }
+            return listDatetime.ToArray();
+        }
 
     }
 
