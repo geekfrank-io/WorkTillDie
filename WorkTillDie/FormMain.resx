@@ -117,9 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="popupMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>15, 20</value>
+  <metadata name="barManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>149, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="FormMain.IconOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAApZJREFUOE9lk8tPE2EUxWdV/gW7cmHBiq40bFBSwGAqJO7QGJMWawA3JsZgfIYi
+        D1ExxGLxiYGYKNBoUCQaURS0ghCDRE0X00KFtvJQ2kJn6HO+4/e1M9jiTU7uLOb+cs69M1x68TzJ+uwh
+        ZWNzkm3CK/kmvYmEYyGWmA9GfIIg9FKVEkKy5Ncz65WDqPu+EWvvFAnYpoABBzDiBuyzwLiHYOZPDCFB
+        DFCIlUotj6XqzghR37WTF9YRwPIeuPEOaBsGusaBt64U5BOVcykGQRRBAf3rELMNKsswuckGFDGIAuoY
+        A4bSILPLUYgpiBWAirMOk9KWQcl/7mkCNbY46gek5OA6hOrhBPBBjjNB4/xeCWNNFP0UUsaZn0s9h2+F
+        sfeygOImAfuviajqiqLlDUGbDGG973vKAYN89UlYCEawGAj3cAfbwx42qKhI7oZ7EVynEMXJ7Y/AIE8h
+        cynIKO30Wh6upDkUTw7LDtJVTZ2wCEqUjlHgNYUwANPQNIlzxU2huO7SCnZf9ENXv5oB2HdFxFm6m/TF
+        MiePvgDdk8B9O4lxBeagd8fxWeQcdWF79U/kn19eBxQ1CjjQuoa6fum/67B+dVCa43ae/NWTU+FEtpHK
+        4IT22AzyL1CIHEmBnHkSR+vQvzM3vpRQ2Rl5zGlNrrJsI+9PAmTlVrlRUBvMgJQ0CzjUHkZVZxSmB1EG
+        XdY1CHout/yHSmPgrekAJhaH7UWJo4DYlQobQtDVrVrKzfRDYqU94lBT+/0bISzOrlPz2FMbQCFdMFsy
+        g+adXnqWV7O4KTmsFIMknRj4wEbQVtM0civd2FY549eapi2bje7MYaU0J/is7ApXKd1Jr8bo9NKeoD3O
+        nim8e4vRqdfo+bTfmeP+AvGwo9W01sRpAAAAAElFTkSuQmCC
+</value>
+  </data>
   <assembly alias="DevExpress.Data.v22.1" name="DevExpress.Data.v22.1, Version=22.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
   <data name="btnShow.ImageOptions.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v22.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -178,27 +196,9 @@
         MjQgMzAsMjQgMzAsMjAgMjAsMjAgICIgY2xhc3M9IkJsYWNrIiAvPg0KICA8L2c+DQo8L3N2Zz4L
 </value>
   </data>
-  <metadata name="barManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>149, 17</value>
+  <metadata name="popupMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>15, 20</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="FormMain.IconOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wgAADsIBFShKgAAAApZJREFUOE9lk8tPE2EUxWdV/gW7cmHBiq40bFBSwGAqJO7QGJMWawA3JsZgfIYi
-        D1ExxGLxiYGYKNBoUCQaURS0ghCDRE0X00KFtvJQ2kJn6HO+4/e1M9jiTU7uLOb+cs69M1x68TzJ+uwh
-        ZWNzkm3CK/kmvYmEYyGWmA9GfIIg9FKVEkKy5Ncz65WDqPu+EWvvFAnYpoABBzDiBuyzwLiHYOZPDCFB
-        DFCIlUotj6XqzghR37WTF9YRwPIeuPEOaBsGusaBt64U5BOVcykGQRRBAf3rELMNKsswuckGFDGIAuoY
-        A4bSILPLUYgpiBWAirMOk9KWQcl/7mkCNbY46gek5OA6hOrhBPBBjjNB4/xeCWNNFP0UUsaZn0s9h2+F
-        sfeygOImAfuviajqiqLlDUGbDGG973vKAYN89UlYCEawGAj3cAfbwx42qKhI7oZ7EVynEMXJ7Y/AIE8h
-        cynIKO30Wh6upDkUTw7LDtJVTZ2wCEqUjlHgNYUwANPQNIlzxU2huO7SCnZf9ENXv5oB2HdFxFm6m/TF
-        MiePvgDdk8B9O4lxBeagd8fxWeQcdWF79U/kn19eBxQ1CjjQuoa6fum/67B+dVCa43ae/NWTU+FEtpHK
-        4IT22AzyL1CIHEmBnHkSR+vQvzM3vpRQ2Rl5zGlNrrJsI+9PAmTlVrlRUBvMgJQ0CzjUHkZVZxSmB1EG
-        XdY1CHout/yHSmPgrekAJhaH7UWJo4DYlQobQtDVrVrKzfRDYqU94lBT+/0bISzOrlPz2FMbQCFdMFsy
-        g+adXnqWV7O4KTmsFIMknRj4wEbQVtM0civd2FY549eapi2bje7MYaU0J/is7ApXKd1Jr8bo9NKeoD3O
-        nim8e4vRqdfo+bTfmeP+AvGwo9W01sRpAAAAAElFTkSuQmCC
-</value>
-  </data>
   <metadata name="alertControl1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>280, 17</value>
   </metadata>

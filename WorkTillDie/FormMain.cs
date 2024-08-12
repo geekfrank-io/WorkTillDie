@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
@@ -12,13 +13,22 @@ namespace WorkTillDie
             InitializeComponent();
             AddRecordWhenAutoStart();
         }
-
+        List<WorkingTime> workingTimes = new List<WorkingTime>();
 
         private void LoadData()
         {
-            DateTime[] dates = UtilsCommon.GetInstance().getAllRecordsOfEveryday();
-            GCRecords.DataSource = dates;
+            //DateTime[] dates = UtilsCommon.GetInstance().getAllRecordsOfEveryday();
+            List<List<DateTime>> listDatetimeGroup = UtilsCommon.GetInstance().getAllRecordsByGroup();
 
+            foreach (List<DateTime> item in listDatetimeGroup)
+            {
+
+                WorkingTime workingTime = new WorkingTime(item);
+                workingTimes.Add(workingTime);
+            }
+
+            GCRecord.DataSource = workingTimes;
+            UpdateTime();
         }
 
         private void ckAutoStart_CheckedChanged(object sender, EventArgs e)
@@ -33,6 +43,25 @@ namespace WorkTillDie
             }
         }
 
+        private void UpdateTime()
+        {
+            TimeSpan span = CalculateExtraTimeOfAllTime();
+            LBLExtraOfMonth.Text = LBLExtraOfMonth.Tag.ToString() + span.ToString("g");
+        }
+
+        private TimeSpan CalculateExtraTimeOfAllTime()
+        {
+            TimeSpan extraTime = TimeSpan.Zero;
+            if (workingTimes == null) return extraTime;
+            double toltalMinutes = 0;
+            foreach (WorkingTime workingTime in workingTimes) {
+                toltalMinutes += workingTime.ExtraMinutes;
+            }
+            int h = (int)toltalMinutes % 60;
+            int m=(int)toltalMinutes-h*60;
+            extraTime = new TimeSpan(h, m, 0);
+            return extraTime; 
+        }
 
         private void AddRecord()
         {

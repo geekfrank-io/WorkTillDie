@@ -142,7 +142,7 @@ namespace WorkTillDie
             XmlElement xmlMonth = (XmlElement)xmlYear.SelectSingleNode($"Month[@Value='{month}']");
             if (xmlMonth == null) return null;
 
-            XmlElement xmlDay = (XmlElement)xmlYear.SelectSingleNode($"Day[@Value='{day}']");
+            XmlElement xmlDay = (XmlElement)xmlMonth.SelectSingleNode($"Day[@Value='{day}']");
             if (xmlDay == null || xmlDay.ChildNodes.Count == 0) return null;
 
             foreach (XmlElement xmlRecord in xmlDay.ChildNodes)
@@ -150,7 +150,7 @@ namespace WorkTillDie
                 string str = xmlRecord.InnerText;// = time.ToString("yyyy-MM-dd HH:mm:ss:ffff");
                 //DateTimeFormatInfo dtFormat = new DateTimeFormatInfo();
                 //dtFormat.ShortDatePattern = "yyyy-MM-dd HH:mm:ss:ffff";
-                DateTime t = DateTime.ParseExact(str, "yyyy-MM-dd HH:mm:ss:ffff",null);
+                DateTime t = DateTime.ParseExact(str, "yyyy-MM-dd HH:mm:ss:ffff", null);
                 listDatetime.Add(t);
             }
             return listDatetime.ToArray();
@@ -165,7 +165,8 @@ namespace WorkTillDie
             XmlElement root = (XmlElement)xmlDoc.SelectSingleNode("Records");
             if (root == null) return null;
             XmlNodeList nodeList = root.SelectNodes("Year/Month/Day/Record");
-            foreach (XmlNode node in nodeList) { 
+            foreach (XmlNode node in nodeList)
+            {
                 string str = node.InnerText;
                 //DateTimeFormatInfo dtFormat = new DateTimeFormatInfo();
                 //dtFormat.ShortDatePattern = "yyyy-MM-dd HH:mm:ss:ffff";
@@ -175,8 +176,112 @@ namespace WorkTillDie
             return listDatetime.ToArray();
         }
 
+        public List<List<DateTime>> getAllRecordsByGroup()
+        {
+            List<List<DateTime>> listDatetimeGroup = new List<List<DateTime>>();
+            string filename = GetRecordFile();
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(filename);
+            XmlElement root = (XmlElement)xmlDoc.SelectSingleNode("Records");
+            if (root == null) return null;
+            XmlNodeList nodeDayList = root.SelectNodes("Year/Month/Day");
+            foreach (XmlNode nodeDay in nodeDayList)
+            {
+                List<DateTime> listDatetime = new List<DateTime>();
+                foreach (XmlNode node in nodeDay)
+                {
+                    string str = node.InnerText;
+                    //DateTimeFormatInfo dtFormat = new DateTimeFormatInfo();
+                    //dtFormat.ShortDatePattern = "yyyy-MM-dd HH:mm:ss:ffff";
+                    DateTime t = DateTime.ParseExact(str, "yyyy-MM-dd HH:mm:ss:ffff", null);
+                    listDatetime.Add(t);
+                }
+                listDatetimeGroup.Add(listDatetime);
+            }
+            return listDatetimeGroup;
+        }
+
+
+
     }
 
+    public class TimeLog
+    {
+        public DateTime Time;
+        public string Value { get; private set; }
+        public string Note { get; set; }
+
+        public TimeLog(DateTime dateTime, string Note = null)
+        {
+            Time = dateTime;
+            Value = dateTime.ToString("yyyy-MM-dd HH:mm:ss");
+            if (Note != null)
+            {
+                this.Note = Note;
+            }
+        }
+    }
+
+    public class WorkingTime
+    {
+        // 日期
+        public string Date { get; }
+        // 星期
+        public DayOfWeek DayOfWeek { get; }
+        // 时间记录
+        public List<TimeLog> TimeLogs { get; }
+        private DateTime StartTime;
+        private DateTime EndTime;
+        // 最早时间记录
+        public string StartValue { get; }
+        //最新时间记录
+        public string EndValue { get; }
+        private TimeSpan TimeSpan;
+        //上班时间
+        public string WorkingSpan { get; }
+        // 加班时长（以分钟显示）
+        public double ExtraMinutes { get; }
+        // 加班时长（以小时显示）
+        public string ExtraTime { get; }
+        public WorkingTime(List<DateTime> listTime)
+        {
+            listTime.Sort();
+
+            TimeLogs = new List<TimeLog>();
+            foreach (DateTime t in listTime)
+            {
+                TimeLog log = new TimeLog(t);
+                TimeLogs.Add(log);
+            }
+
+            TimeLog startLog = TimeLogs.FirstOrDefault();
+            StartTime = startLog.Time;
+            startLog.Note = "StartTime";
+
+            DayOfWeek = StartTime.DayOfWeek;
+            Date = StartTime.ToString("yyyy-MM-dd");
+            StartValue = StartTime.ToString("HH:mm:ss");
+
+            if (TimeLogs.Count > 1)
+            {
+                TimeLog endLog = TimeLogs.LastOrDefault();
+                endLog.Note = "EndTime";
+                EndTime = endLog.Time;
+                EndValue = EndTime.ToString("HH:mm:ss");
+                TimeSpan = EndTime.Subtract(StartTime);
+                WorkingSpan = TimeSpan.ToString("g");
+                if(TimeSpan.TotalMinutes>540)
+                {
+                    TimeSpan time = new TimeSpan(9, 0, 0);
+                    ExtraMinutes = Math.Floor(TimeSpan.TotalMinutes)-540;
+                    ExtraTime = TimeSpan.Subtract(time).ToString();
+                }
+            }
+
+
+
+        }
+    }
 
 
 }
